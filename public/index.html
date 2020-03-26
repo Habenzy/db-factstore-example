@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="contentDisplay">
+    <h1>Here is the content</h1>
+  </div>
+  <form action='/posts' method='POST'>
+    <input type='text' name='name' placeholder="Please enter your name"/>
+    <input type='text' name='message' />
+    <input type='submit' />
+  </form>
+  <script>
+    let displayArea= document.getElementById('contentDisplay')
+
+    fetch('/posts')
+      .then(res => res.json())
+      .then(jsonRes => {
+        jsonRes.forEach(item => {
+          displayArea.innerHTML += `<h2>${item.name}:</h2><h3>${item.content}</h3>`
+        })
+      })
+  </script> 
+</body>
+</html>
